@@ -1,0 +1,24 @@
+* Survey 
+** Features [0/4]
+- [ ] A survey is composed of several questions
+- [ ] Survyes can be created by admins
+- [ ] Survey results are publicly accessible
+- [ ] REST API
+
+** Models 
+*** Survey [0/7]
+- [ ] Name
+- [ ] Tag: eg software, general, off-topic etc.
+- [ ] Date created
+- [ ] Date last modified, if different from date created
+- [ ] Author: User object
+- [ ] List of questionsk
+- [ ] Results
+
+*** Question [0/4]
+- [ ] Name
+- [ ] Description
+- [ ] Type of question: drop down with range, paragraph, multiple choice, may include answer set depending on type of question
+- [ ] Required: boolean
+
+** REST API routes
