@@ -37,22 +37,17 @@ class Question (models.Model):
     survey = models.ForeignKey(Survey, null=True, blank=True)
     required = models.BooleanField(default=False)
 
+    class Meta:
+        abstract = True
+
     def __str__(self):
         return self.name
 
 
-class QuestionText(Question):
+class QuestionMultiple(Question):
     type = models.CharField(max_length=30, default='text')
 
 
-class QuestionCheckBox(Question):
-    type = models.CharField(max_length=30, default='checkbox')
-
-
-class QuestionDropDown(Question):
-    type = models.CharField(max_length=30, default='dropdown')
-
-
-class QuestionMultipleOption(models.Model):
+class QuestionDataMultiple(models.Model):
     name = models.CharField(max_length=30)
-    question = models.ForeignKey(Question, null=True)
+    question = models.ForeignKey(QuestionMultiple, null=True)
