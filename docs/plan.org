@@ -1,24 +1,39 @@
+#+TTITLE: Survey Application Planning (Draft)
+
 * Survey 
 ** Features [0/4]
 - [ ] A survey is composed of several questions
 - [ ] Survyes can be created by admins
 - [ ] Survey results are publicly accessible
 - [ ] REST API
-
+  
 ** Models 
-*** Survey [0/7]
-- [ ] Name
-- [ ] Tag: eg software, general, off-topic etc.
-- [ ] Date created
-- [ ] Date last modified, if different from date created
-- [ ] Author: User object
-- [ ] List of questionsk
-- [ ] Results
+*** Survey [6/7]
+- [X] Name
+- [X] Description
+- [X] Date created
+- [X] List of questionsk
+- [X] Author: User object
+- [X] Category
 
-*** Question [0/4]
-- [ ] Name
-- [ ] Description
-- [ ] Type of question: drop down with range, paragraph, multiple choice, may include answer set depending on type of question
-- [ ] Required: boolean
+- [ ] Tag: eg software, general, off-topic etc.; maybe later
+
+*** Question [4/4]
+    A base =Question= will have the main properties. Extended models such as =QuestionText= will ahave more specific properties that specify what type of answers are possible.
+- [X] Name
+- [X] Description
+- [X] Required: boolean
+- [X] Types: string (from extended class)
+  - [X] Text:
+  - [X] CheckBox:
+    - [X] options: tuple of options
+  - [X] Drop Down
+    - [X] options: tuple of options
+      
+** Views
 
 ** REST API routes
+
+   
+** Bugs
+- [ ] Admin can choose author... not ideal
