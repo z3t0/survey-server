@@ -42,7 +42,7 @@
     
     It is a form which is submitted and validated by POST
     
-- [ ] Route URL to =/create=
+- [X] Route URL to =/create=
 - [ ] Create view with POST condition
 - [ ] create html file
 - [ ] render /static/ elements
