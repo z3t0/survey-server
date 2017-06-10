@@ -17,7 +17,8 @@
 - [X] Category
 
 - [ ] Tag: eg software, general, off-topic etc.; maybe later
-
+- [ ] End date
+  
 *** Question [4/4]
     A base =Question= will have the main properties. Extended models such as =QuestionText= will ahave more specific properties that specify what type of answers are possible.
 - [X] Name
@@ -31,6 +32,31 @@
     - [X] options: tuple of options
       
 ** Views
+   
+*** Index
+    This view lists of all available surveys
+    
+*** Create Survey
+    This view allows surveys to be created and has different types of elements
+    for different question types. 
+    
+    It is a form which is submitted and validated by POST
+    
+- [ ] Route URL to =/create=
+- [ ] Create view with POST condition
+- [ ] create html file
+- [ ] render /static/ elements
+  - [ ] name
+  - [ ] description
+- [ ] render non static elements
+- [ ] adding questions
+- [ ] Add styling
+
+
+*** Fill in Survey
+    This view allows a survey to be filled in and is submitted and validated by POST
+    
+*** Results
 
 ** REST API routes
 
