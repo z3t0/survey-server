@@ -1,15 +1,37 @@
-<h2>Create Survey Form</h2>
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
 
+
+{% block title %}
+Create Survey Form
+{% endblock %}
+
+{% block head %}
+{% render_bundle 'assets' %}
+<link rel="stylesheet" href="{% static 'survey/create_survey.css' %}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block content %}
 <form method="post">
     <div class="surveyTitle">
 	<input type="text" id="title" name="title" value="Untitled Survey">
     </div>
+    <p> Questions</p>
+    <div class="questions" id="questions">
+    </div>
     <div class="surveyBuilder" >
-	<div>
-	    <input class="btnNewQuestion" type="button" value="Add new Question">
+	<div class="dropdown">
+	    <input id="btnNewQuestion" class="btnNewQuestion" type="button" value="Add new Question">
+	    <div class="dropdown-content" >
+		<a id="btnNewQuestionText" href="#">Text</a>
+		<a id="btnNewQuestionDropDown" href="#">Dropdown</a>
+		<a id="btnNewQuestionMultipleChoice" href="#">Multiple Choice</a>
+	    </div>
 	</div>
 	<div>
 	    <input class="btnSubmit" type="submit" value="Create">
 	</div>
     </div>
 </form>
+{% endblock %}

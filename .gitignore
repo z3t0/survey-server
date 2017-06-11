@@ -103,3 +103,9 @@ ENV/
 # django
 db.sqlite3
 survey/migrations
+
+# npm
+node_modules
+static
+static_src/bundles
+
