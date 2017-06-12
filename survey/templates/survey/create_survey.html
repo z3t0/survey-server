@@ -13,7 +13,8 @@ Create Survey Form
 {% endblock %}
 
 {% block content %}
-<form method="post">
+<form action="{% url 'survey:create_survey' %}" method="post">
+  {% csrf_token % %}
     <div class="surveyTitle">
 	<input type="text" id="title" name="title" value="Untitled Survey">
     </div>

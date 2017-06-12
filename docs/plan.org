@@ -62,4 +62,11 @@
 
    
 ** Bugs
-- [ ] Admin can choose author... not ideal
+- [X] Admin can choose author... not ideal; no longer relevant as everyting is handled outside of the admin
+- [ ] Need a delete button for questions
+- [ ] Need a way to tell what type of questions
+  
+** TODO
+- [ ] CSS Styling
+- [ ] Modelling Form Data on Backend
+  - [ ] Dealing with arbitrary form length
