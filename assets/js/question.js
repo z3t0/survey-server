@@ -1,4 +1,4 @@
-class Question {
+class QuestionText {
 
     constructor(parent) {
 	this.parent = parent
@@ -17,6 +17,7 @@ class Question {
 	let div2 = document.createElement('div')
 	let questionText = document.createElement('input')
 	questionText.type = 'text'
+	questionText.placeholder = 'Enter a text question...'
 	div2.appendChild(questionText)
 
 	this.attributes['questionText'] = () => {
@@ -29,6 +30,8 @@ class Question {
     data() {
 	let data = {}
 
+	data['type'] = 'text'
+
 	for (var attr in this.attributes) {
 	    let val = this.attributes[attr]()
 	    data[attr] = val
@@ -38,4 +41,4 @@ class Question {
     }
 }
 
-export {Question}
+export {QuestionText}

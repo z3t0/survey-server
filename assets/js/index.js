@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     // Create question on buttons
     $("#btnNewTextQuestion").click(() => {
-	survey.createQuestion()
+	survey.createQuestionText()
     })
 
     $("#btnNewQuestionMultipleChoice").click(() => {

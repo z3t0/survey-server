@@ -1,4 +1,4 @@
-import {Question} from './question.js'
+import {QuestionText} from './question.js'
 import $ from 'jquery'
 
 let csrftoken = getCookie('csrftoken')
@@ -36,8 +36,8 @@ class Survey {
 	}
     }
 
-    createQuestion() {
-	let question = new Question(this.questionsElement)
+    createQuestionText() {
+	let question = new QuestionText(this.questionsElement)
 	this.questions.push(question)
 
     }
