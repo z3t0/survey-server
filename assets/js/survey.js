@@ -38,11 +38,13 @@ class Survey {
     }
     createQuestionDropDown() {
 	let question = new QuestionDropDown(this.questionsElement)
+	question.init()
 	this.questions.push(question)
     }
 
     createQuestionText() {
 	let question = new QuestionText(this.questionsElement)
+	question.init()
 	this.questions.push(question)
     }
 
@@ -71,7 +73,7 @@ class Survey {
 	    data: JSON.stringify(data),
 	    dataType: 'text',
 	    success: function(result) {
-		alert(result.Result);
+		console.log('success')
 	    }
 });
     }

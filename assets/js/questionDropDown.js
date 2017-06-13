@@ -1,30 +1,17 @@
-class QuestionDropDown {
+import {Question} from './question.js'
+
+class QuestionDropDown extends Question {
 
     constructor(parent) {
-	this.parent = parent
-	
-	this.attributes = {}
-	this.attributes["choices"] = []
-	this.element = document.createElement("div")
+	super(parent)
 
-	this.createElement()
-	this.parent.appendChild(this.element)
+	this.attributes["choices"] = []
     }
 
     createElement() {
-	let div = this.element
+	let div = super.createElement()
 
-	// Question Text
-	let div2 = document.createElement("div")
-	let questionText = document.createElement("input")
-	questionText.type = "text"
-	questionText.placeholder = "Enter a text question..."
-	div2.appendChild(questionText)
-
-	this.attributes["questionText"] = () => {
-	    return questionText.value
-	}
-
+	// choices
 	let div3 = document.createElement("div")
 	let addChoice = document.createElement("button")
 	addChoice.innerHTML = "Add Choice"
@@ -46,23 +33,14 @@ class QuestionDropDown {
 
 	div3.appendChild(addChoice)
 
-	div.appendChild(div2)
 	div.appendChild(div3)
 	div.appendChild(divChoices)
     }
 
     data() {
-	let data = {}
+	let data = super.data()
 
 	data["type"] = "dropdown"
-
-	for (var attr in this.attributes) {
-	    if (attr == "choices")
-		continue
-
-	    let val = this.attributes[attr]()
-	    data[attr] = val
-	}
 
 	data.choices = []
 	
