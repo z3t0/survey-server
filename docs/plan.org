@@ -1,32 +1,4 @@
-#+TTITLE: Survey Application Planning (Draft)
-
-* Survey 
-** Features [0/4]
-- [ ] A survey is composed of several questions
-- [ ] Survyes can be created by admins
-- [ ] Survey results are publicly accessible
-- [ ] REST API
-  
-** Models 
-*** Survey [6/7]
-- [X] Name
-- [X] Description
-- [X] Date created
-- [X] List of questionsk
-- [X] Author: User object
-- [X] Category
-
-- [ ] Tag: eg software, general, off-topic etc.; maybe later
-- [ ] End date
-  
-*** Question [4/4]
-    A base =Question= will have the main properties. Extended models such as =QuestionText= will ahave more specific properties that specify what type of answers are possible.
-- [X] Name
-- [X] Description
-- [X] Required: boolean
-- [X] Types: string (from extended class)
-  - [X] Text:
-  - [X] CheckBox:
+ox:
     - [X] options: tuple of options
   - [X] Drop Down
     - [X] options: tuple of options
@@ -70,3 +42,18 @@
 - [ ] CSS Styling
 - [ ] Modelling Form Data on Backend
   - [ ] Dealing with arbitrary form length
+    
+** Survey Builder [2/12]
+- [X] Multiple Choice Question
+- [ ] Dropdown Question
+- [ ] Delete question
+- [ ] Reorder question
+- [ ] Radio Question
+- [X] Send POST to backend
+- [ ] Process on the backend
+- [ ] Receive errors from backend validation
+  - [ ] Improper JSON as dev error
+- [ ] Store on backend
+- [ ] Receive stored survey from backend
+- [ ] Process new data and modify in front end
+- [ ] same as above, back end
