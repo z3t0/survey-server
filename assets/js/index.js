@@ -1,117 +1,66 @@
 import $ from "jquery";
+import {Survey} from './survey.js'
 
-window.onload = function() {
-    let questions = document.getElementById('questions')
+$(document).ready(function() {
+    //  Get Questions div
+    let questions = $("#questions")
 
-    $("%btnNewQuestionText").click(() => {
+    // Set up ine memory model
+    // TODO load from django for editing and errors
+    // TOOD errors
+    let survey = new Survey()
 
-    // Form Builder
-    document.getElementById('btnNewQuestionText').addEventListener('click', () => {
-	BuildQuestionText(questions)
+    // Create question on buttons
+    $("#btnNewTextQuestion").click(() => {
+	survey.createQuestion()
     })
 
-    document.getElementById('btnNewQuestionDropDown').addEventListener('click', () => {
-	ChoiceQuestionBuilder(questions, 'dropdown')
+    $("#btnNewQuestionMultipleChoice").click(() => {
     })
 
-    document.getElementById('btnNewQuestionMultipleChoice').addEventListener('click', () => {
-	ChoiceQuestionBuilder(questions, 'multiplechoice')
-    })
-}
-
-function ChoiceQuestionBuilder(el, typename) {
-    let {div, name}  = BuildQuestion(el)
-	
-    // type of this question as hidden field
-    let type = document.createElement('input')
-    type.name = 'type'
-    type.type = 'hidden'
-    type.value = typename
-
-    let div2 = document.createElement('div')
-    div.appendChild(type)
-
-    // choices for this question
-    let divChoices = document.createElement('div')
-
-    // Button for creating new choices
-    let div4 = document.createElement('div')
-    let newButton = document.createElement('input')
-    newButton.value = 'Add a choice'
-    newButton.type = 'button'
-    newButton.addEventListener('click', ()=>{
-	let divChoice = document.createElement('div')
-
-	let choiceText = document.createElement('input')
-	choiceText.type = 'text',
-	choiceText.value = 'Choice ' + (divChoices.childElementCount + 1)
-	choiceText.name = name + '.choice_' + (divChoices.childElementCount + 1)
-
-	divChoice.appendChild(choiceText)
-
-	divChoices.appendChild(divChoice)
+    // Submit handler
+    $("#btnSubmit").click(() => {
+	console.log(survey.data())
     })
 
-    div4.appendChild(newButton)
+})
 
-    div.appendChild(div2)
-    div.appendChild(div4)
-    div.appendChild(divChoices)
-
-    div.className = 'questionDropDown'
-
-    div.appendChild(div2)
-    el.appendChild(div)
-}
-
-// el: the element to add the question to, used to get number
-// need a better way to do this
-function BuildQuestionText(el) {
-    let {div, name}  = BuildQuestion(el)
-	
-    // type of this question as hidden field
-    let type = document.createElement('input')
-    type.name = name + '.type'
-    type.type = 'hidden'
-    type.value = 'text'
-
-
-    div.appendChild(type)
-
-    el.appendChild(div)
-}
-
-function BuildQuestion(el) {
-    // Get question number
-    let name = "question_" + (el.childElementCount + 1)
-
-    // main div
+function BuildQuestion(el, survey) {
+    
+    // DOM
     let div = document.createElement('div')
 
-    // Name of question
     let div2 = document.createElement('div')
-    let questionName = document.createElement('input')
-    questionName.type = 'text'
-    questionName.value = "Enter Question"
-    questionName.name = name + '.name'
-    div2.appendChild(questionName)
-
-    // Description of question
+    let questionText = document.createElement('input')
+    questionText.type = 'text'
+    questionText.placeholder = 'My question is..'
+    div2.appendChild(questionText)
+    
     let div3 = document.createElement('div')
-    let questionDescription = document.createElement('textarea')
-    questionDescription.value = 'Description'
-    questionDescription.name = name + '.description'
-    div3.appendChild(questionDescription)
+    let description = document.createElement('input')
+    description.type = 'text'
+    description.placeholder = 'Description is...'
+    div3.appendChild(description)
 
-    // add to main div
+
     div.appendChild(div2)
     div.appendChild(div3)
 
-    // css
-    div.className = "question"
+    // id, name, description
 
-    div.name = name
-    console.log(div)
+    let question = {}
+    question.id = survey.questions.length
 
-    return {div:div, name: name}
+    question.name = () => {
+	return questionText.value
+    }
+    question.description = () => {
+	return description.value
+    }
+
+    survey.questions.push(question)
+
+    el.append(div)
+
+    console.log(el)
 }

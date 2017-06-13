@@ -13,26 +13,32 @@ Create Survey Form
 {% endblock %}
 
 {% block content %}
-<form action="{% url 'survey:create_survey' %}" method="post">
-  {% csrf_token % %}
-    <div class="surveyTitle">
-	<input type="text" id="title" name="title" value="Untitled Survey">
-    </div>
-    <p> Questions</p>
-    <div class="questions" id="questions">
-    </div>
-    <div class="surveyBuilder" >
-	<div class="dropdown">
-	    <input id="btnNewQuestion" class="btnNewQuestion" type="button" value="Add new Question">
-	    <div class="dropdown-content" >
-		<a id="btnNewQuestionText" href="#">Text</a>
-		<a id="btnNewQuestionDropDown" href="#">Dropdown</a>
-		<a id="btnNewQuestionMultipleChoice" href="#">Multiple Choice</a>
-	    </div>
-	</div>
-	<div>
-	    <input class="btnSubmit" type="submit" value="Create">
-	</div>
-    </div>
-</form>
+  <div class="surveyBuilder" >
+
+      <div class="info" >
+	  <div>
+	      <input id="surveyTitle" type="text" placeholder="title" name="survey_title" >
+	  </div>
+	  <div>
+	      <input id="surveyDescription" type="text" placeholder="description" name="survey_title" >
+	  </div>
+      </div>
+
+      <div id ="questions"  class="questions">
+      </div>
+
+      <div class="controls" >
+	  <div class="newQuestionDiv" >
+	      <p id="newQuestion">New Question</p>
+	      <div class="newQuestionOptions" >
+		  <a id="btnNewTextQuestion">Text</a>
+		  <a id="btnNewMultipleChoiceQuestion">Multiple Choice</a>
+	      </div>
+	  </div>
+	  <div>
+	      <button type="button" id="btnSubmit">Create Survey</button>
+	  </div>
+      </div>
+
+  </div>
 {% endblock %}

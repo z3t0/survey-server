@@ -1,5 +1,5 @@
-/* Dropdown Button */
-.btnNewQuestion {
+/* NewQuestionDiv Button */
+#newQuestion {
     background-color: #4CAF50;
     color: white;
     padding: 16px;
@@ -8,14 +8,14 @@
     cursor: pointer;
 }
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
+/* The container <div> - needed to position the newQuestionDiv content */
+.newQuestionDiv {
     position: relative;
     display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
+/* NewQuestionDiv Content (Hidden by Default) */
+.newQuestionOptions {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -24,24 +24,24 @@
     z-index: 1;
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
+/* Links inside the newQuestionDiv */
+.newQuestionOptions a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+/* Change color of newQuestionDiv links on hover */
+.newQuestionOptions a:hover {background-color: #f1f1f1}
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+/* Show the newQuestionDiv menu on hover */
+.newQuestionDiv:hover .newQuestionOptions {
     display: block;
 }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
+/* Change the background color of the newQuestionDiv button when the newQuestionDiv content is shown */
+.newQuestionDiv:hover .dropbtn {
     background-color: #3e8e41;
 }
 
@@ -52,4 +52,9 @@
 
 .questionText {
 
+}
+
+#btnSubmit {
+    margin: 10px;
+    padding: 15px;
 }
