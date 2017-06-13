@@ -21,6 +21,7 @@ $(document).ready(function() {
     // Submit handler
     $("#btnSubmit").click(() => {
 	console.log(survey.data())
+	survey.submit()
     })
 
 })
