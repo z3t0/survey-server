@@ -15,7 +15,8 @@ $(document).ready(function() {
 	survey.createQuestionText()
     })
 
-    $("#btnNewQuestionMultipleChoice").click(() => {
+    $("#btnNewMultipleChoiceQuestion").click(() => {
+	survey.createQuestionDropDown()
     })
 
     // Submit handler

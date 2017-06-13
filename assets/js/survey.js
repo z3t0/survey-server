@@ -1,4 +1,5 @@
-import {QuestionText} from './question.js'
+import {QuestionText} from './questionText.js'
+import {QuestionDropDown} from './questionDropDown.js'
 import $ from 'jquery'
 
 let csrftoken = getCookie('csrftoken')
@@ -35,11 +36,14 @@ class Survey {
 	    return $("#surveyDescription").val()
 	}
     }
+    createQuestionDropDown() {
+	let question = new QuestionDropDown(this.questionsElement)
+	this.questions.push(question)
+    }
 
     createQuestionText() {
 	let question = new QuestionText(this.questionsElement)
 	this.questions.push(question)
-
     }
 
     data() {
@@ -59,7 +63,17 @@ class Survey {
 
     submit() {
 	let data = this.data()
-	$.post('http://localhost:8000/create-survey/', data)
+	console.log(data)
+	$.ajax({
+	    url: 'http://localhost:8000/create-survey/',
+	    type: 'POST',
+	    contentType: 'application/json; charset=utf-8',
+	    data: JSON.stringify(data),
+	    dataType: 'text',
+	    success: function(result) {
+		alert(result.Result);
+	    }
+});
     }
 }
 

@@ -1,11 +1,10 @@
 from django.shortcuts import render
+import json
 
 
 def createSurvey(request):
 
     if request.method == "POST":
-        import pprint
-        pp = pprint.PrettyPrinter(indent = 4)
-        pp.pprint(request.POST)
+        data = json.loads(request.body)
 
     return render(request, 'survey/create_survey.html')
