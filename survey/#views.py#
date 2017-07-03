@@ -1,11 +1,11 @@
 from django.shortcuts import render
 import json
-from django.contrib.auth.decorators import login_required
+
 from .models import Question, QuestionText, QuestionDropDown, Survey
 
 
-@login_required
 def createSurvey(request):
+
     if request.method == "POST":
         data = json.loads(request.body)
         print(data)
@@ -19,12 +19,7 @@ def createSurvey(request):
             """ Text Question """
             if question['type'] == 'text':
                 print(question)
-                try:
-                    q = QuestionText(name=question["questionText"], index=question["order"], survey=survey)
-                    q.save()
-                except:
-                    print("an error occured while creating a text question")
-
+                pass
             elif question['type'] == 'dropdown':
                 print(question)
             else:
