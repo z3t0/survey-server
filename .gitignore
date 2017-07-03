@@ -108,4 +108,5 @@ survey/migrations
 node_modules
 static
 static_src/bundles
+webpack-stats.json
 
