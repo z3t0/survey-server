@@ -33,6 +33,7 @@ def createSurvey(request):
 
     return render(request, 'survey/create_survey.html')
 
+@login_required
 def index(request):
 
     surveys = Survey.objects.all().order_by('-date')
