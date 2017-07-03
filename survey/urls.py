@@ -5,4 +5,5 @@ from . import views
 app_name = 'survey'
 urlpatterns = [
     url(r'^create-survey/$', views.createSurvey, name='create_survey'),
+    url(r'^index/$', views.index, name='index'),
 ]

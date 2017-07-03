@@ -32,3 +32,12 @@ def createSurvey(request):
             
 
     return render(request, 'survey/create_survey.html')
+
+def index(request):
+
+    surveys = Survey.objects.all().order_by('-date')
+    context = {'surveys': surveys}
+
+    print(surveys)
+
+    return render(request, 'survey/index.html', context)

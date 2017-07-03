@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+
+{% block title %}
+Survey
+{% endblock %}
+
+{% block head %}
+{% render_bundle 'index' %}
+<link rel="stylesheet" href="{% static 'survey/index.css' %}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block content %}
+
+<div class="survey_list">
+    {% for survey in surveys %}
+
+    <div class="survey-list-item" >
+
+	<p>{{ survey.name }}</p>
+
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
