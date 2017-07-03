@@ -46,14 +46,20 @@ def index(request):
 @login_required
 def editSurvey(request, survey_id):
     survey = Survey.objects.get(pk=survey_id)
-    return render(request, 'survey/edit.html')
+    context = {'survey' : survey}
+
+    return render(request, 'survey/edit.html', context)
 
 @login_required
 def fillSurvey(request, survey_id):
     survey = Survey.objects.get(pk=survey_id)
-    return render(request, 'survey/fill.html')
+    context = {'survey' : survey}
+
+    return render(request, 'survey/fill.html', context)
 
 @login_required
 def resultsSurvey(request, survey_id):
     survey = Survey.objects.get(pk=survey_id)
-    return render(request, 'survey/results.html')
+    context = {'survey' : survey}
+
+    return render(request, 'survey/results.html', context)
