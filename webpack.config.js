@@ -7,7 +7,10 @@ module.exports = {
     context: __dirname,
     entry: {
         create_survey: './bundles/create_survey/js/index.js',
-        index: './bundles/index/js/index.js'
+        index: './bundles/index/js/index.js',
+        edit: './bundles/edit/js/index.js',
+        fill: './bundles/fill/js/index.js',
+        results: './bundles/results/js/index.js'
     },
     output: {
 	path: path.resolve('./static_src/bundles/'),

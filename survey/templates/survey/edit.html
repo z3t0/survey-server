@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+
+{% block title %}
+Edit
+{% endblock %}
+
+{% block head %}
+{% render_bundle 'edit' %}
+<link rel="stylesheet" href="{% static 'survey/edit.css' %}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

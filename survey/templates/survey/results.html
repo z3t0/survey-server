@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+
+{% block title %}
+Results
+{% endblock %}
+
+{% block head %}
+{% render_bundle 'results' %}
+<link rel="stylesheet" href="{% static 'survey/results.css' %}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
