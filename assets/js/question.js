@@ -8,7 +8,8 @@ class Question {
 
     }
 
-    init() {
+    init(order) {
+	this.order = order
 	this.element = document.createElement('div')
 
 	this.createElement()
@@ -16,14 +17,14 @@ class Question {
 	this.parent.appendChild(this.element)
     }
 
-    createElement() {
+    createElement(help) {
 	let div = this.element
 
 	// Question Text
 	let div2 = document.createElement('div')
 	let questionText = document.createElement('input')
 	questionText.type = 'text'
-	questionText.placeholder = 'Enter a text question...'
+	questionText.placeholder = help
 	div2.appendChild(questionText)
 
 	this.attributes['main']['questionText'] = () => {
@@ -39,6 +40,7 @@ class Question {
 	let data = {}
 
 	data['type'] = 'text'
+	data['order'] = this.order
 
 	for (var attr in this.attributes['main']) {
 

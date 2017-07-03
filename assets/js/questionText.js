@@ -6,6 +6,10 @@ class QuestionText extends Question {
 	super(parent)
     }
 
+    createElement() {
+	let div = super.createElement('Enter a text question...')
+    }
+
     data() {
 	let data = super.data()
 	data['type'] = 'text'

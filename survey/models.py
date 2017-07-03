@@ -5,6 +5,8 @@ from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 
+from polymorphic.models import PolymorphicModel 
+
 
 class Category (models.Model):
     name = models.CharField(max_length=30, blank=True, null=True, default='undefined')
@@ -31,23 +33,22 @@ class Survey (models.Model):
         return self.name
 
 
-class Question (models.Model):
+class Question (PolymorphicModel):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=300, blank=True)
     survey = models.ForeignKey(Survey, null=True, blank=True)
     required = models.BooleanField(default=False)
-
-    class Meta:
-        abstract = True
+    index = models.IntegerField(null=False)
 
     def __str__(self):
         return self.name
 
+class QuestionText(Question):
+    type = models.CharField(max_length=30, default="text")
 
-class QuestionMultiple(Question):
-    type = models.CharField(max_length=30, default='text')
+class QuestionDropDown(models.Model):
+    type = models.CharField(max_length=30, default="dropdown")
 
-
-class QuestionDataMultiple(models.Model):
+class QuestionDropDownChoice(models.Model):
     name = models.CharField(max_length=30)
-    question = models.ForeignKey(QuestionMultiple, null=True)
+    question = models.ForeignKey(QuestionDropDown, null=True)

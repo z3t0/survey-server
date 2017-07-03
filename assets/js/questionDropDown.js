@@ -9,7 +9,7 @@ class QuestionDropDown extends Question {
     }
 
     createElement() {
-	let div = super.createElement()
+	let div = super.createElement('Enter a drop down question...')
 
 	// choices
 	let div3 = document.createElement("div")

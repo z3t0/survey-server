@@ -5,6 +5,9 @@
   "repository": "git@github.com:z3t0/survey-server.git",
   "author": "Rafi Khan <zetoslab@gmail.com>",
   "license": "UNLICENSED",
+  "scripts" : {
+    "build": "webpack --config webpack.config.js --watch"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",

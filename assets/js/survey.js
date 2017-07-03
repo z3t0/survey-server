@@ -22,6 +22,7 @@ class Survey {
     constructor() {
 	this.questions = []
 	this.questionsElement = document.getElementById("questions")
+	this.questionNumber = 0
 
 	this.createElement()
 
@@ -36,15 +37,16 @@ class Survey {
 	    return $("#surveyDescription").val()
 	}
     }
+
     createQuestionDropDown() {
 	let question = new QuestionDropDown(this.questionsElement)
-	question.init()
+	question.init(++this.questionNumber)
 	this.questions.push(question)
     }
 
     createQuestionText() {
 	let question = new QuestionText(this.questionsElement)
-	question.init()
+	question.init(++this.questionNumber)
 	this.questions.push(question)
     }
 
