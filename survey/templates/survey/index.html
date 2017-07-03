@@ -22,11 +22,9 @@ Survey
 	<p>{{ survey.name }}</p>
 
 	<div class="survey-buttons" >
-
-	<button class="survey-btn-edit" type="button">Edit</button>
-	<button class="survey-btn-fillin" type="button">Fill in</button>
-	<button class="survey-btn-results" type="button">Results</button>
-
+	    <a href="{% url 'survey:survey_edit' survey.id %}">Edit</a>
+	    <a href="{% url 'survey:survey_fill' survey.id %}">Fill</a>
+	    <a href="{% url 'survey:survey_results' survey.id %}">Results</a>
 	</div>
     </div>
 
