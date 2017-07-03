@@ -106,7 +106,7 @@ survey/migrations
 
 # npm
 node_modules
-static
 static_src/bundles
+/static
 webpack-stats.json
 
