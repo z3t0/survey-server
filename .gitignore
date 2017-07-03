@@ -110,3 +110,5 @@ static_src/bundles
 /static
 webpack-stats.json
 
+# emacs
+.\#*
