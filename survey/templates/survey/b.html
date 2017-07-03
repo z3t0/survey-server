@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+
+{% block title %}
+b
+{% endblock %}
+
+{% block head %}
+{% render_bundle 'index' %}
+<link rel="stylesheet" href="{% static 'survey/b.css' %}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

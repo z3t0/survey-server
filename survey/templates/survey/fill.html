@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+
+{% block title %}
+Fill
+{% endblock %}
+
+{% block head %}
+{% render_bundle 'fill' %}
+<link rel="stylesheet" href="{% static 'survey/fill.css' %}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
