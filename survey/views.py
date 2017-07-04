@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 import json
+from django.contrib.auth import logout
 from .models import Question, QuestionText, QuestionDropDown, Survey, SurveyResponse, QuestionResponse, QuestionResponseText
 
 
@@ -96,3 +97,8 @@ def dataSurvey(request):
         data = Survey.objects.get(pk=id).get_info()
 
         return JsonResponse(data)
+
+def logout_view(request):
+    logout(request)
+
+    return HttpResponseRedirect(reverse('survey:index'))
