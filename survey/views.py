@@ -23,33 +23,28 @@ def createSurvey(request, survey_id=None):
     if request.method == "POST":
         data = json.loads(request.body)
 
-        if data['id']:
-            # Update Survey
-            print('received request to update survey')
+        # Create Survey
+        survey = Survey(name= data["title"], description=data["description"], author=request.user)
+        survey.save()
 
-        else:
-            # Create Survey
-            survey = Survey(name= data["title"], description=data["description"], author=request.user)
-            survey.save()
+        # Question data
+        for question in data['questions']:
+            """ Text Question """
+            if question['type'] == 'text':
+                print(question)
+                try:
+                    q = QuestionText(name=question["questionText"], index=question["order"], survey=survey)
+                    q.save()
+                except:
+                    print("an error occured while creating a text question")
 
-            # Question data
-            for question in data['questions']:
-                """ Text Question """
-                if question['type'] == 'text':
-                    print(question)
-                    try:
-                        q = QuestionText(name=question["questionText"], index=question["order"], survey=survey)
-                        q.save()
-                    except:
-                        print("an error occured while creating a text question")
+            elif question['type'] == 'dropdown':
+                print(question)
+            else:
+                print("Unsupported Question type: " + question["type"])
 
-                elif question['type'] == 'dropdown':
-                    print(question)
-                else:
-                    print("Unsupported Question type: " + question["type"])
-
-            response = {'status': 1, 'message': "Ok", 'url': reverse('survey:index')}
-            return HttpResponse(json.dumps(response), content_type='application/json')
+        response = {'status': 1, 'message': "Ok", 'url': reverse('survey:index')}
+        return HttpResponse(json.dumps(response), content_type='application/json')
 
     return render(request, 'survey/create_survey.html', context)
 

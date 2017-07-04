@@ -17,6 +17,7 @@ class QuestionDropDown extends Question {
 	addChoice.innerHTML = "Add Choice"
 
 	let divChoices = document.createElement("div")
+	divChoices.className=""
 
 	addChoice.addEventListener("click", () => {
 	    let div4 = document.createElement("div")
@@ -33,8 +34,8 @@ class QuestionDropDown extends Question {
 
 	div3.appendChild(addChoice)
 
-	div.appendChild(div3)
 	div.appendChild(divChoices)
+	div.appendChild(div3)
     }
 
     data() {
