@@ -83,3 +83,17 @@ class QuestionDropDown(models.Model):
 class QuestionDropDownChoice(models.Model):
     name = models.CharField(max_length=30)
     question = models.ForeignKey(QuestionDropDown, null=True)
+
+# Responses
+class SurveyResponse(models.Model):
+    author = models.ForeignKey(User, null=False)
+    survey = models.ForeignKey(Survey, null=False)
+    date = models.DateField(default=timezone.now)
+
+class QuestionResponse(PolymorphicModel):
+    question = models.ForeignKey(Question)
+
+class QuestionResponseText(QuestionResponse):
+    type = models.CharField(max_length=30, default="text")
+    response = models.TextField()
+
