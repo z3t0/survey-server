@@ -1,0 +1,43 @@
+class QuestionResponse {
+
+    constructor(data, parent) {
+	this.name = data.name
+	this.index = data.index
+	this.type = data.type
+	this.parent = parent
+    }
+
+    init() {
+	this.createElement(this.parent)
+    }
+
+    createElement(parent) {
+	let div = document.createElement('div')
+
+	let divName = document.createElement('name')
+	divName.className = 'question-name'
+
+	let questionName = document.createElement('p')
+	questionName.textContent = this.name
+
+	divName.appendChild(questionName)
+
+	div.appendChild(divName)
+
+	return div
+    }
+
+    data () {
+
+	let data = {}
+
+	data.name = this.name
+	data.index = this.index
+	data.type = this.type
+
+	return data
+    }
+
+}
+
+export {QuestionResponse}
