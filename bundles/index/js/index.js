@@ -43,7 +43,11 @@ $(document).ready(function () {
 	    data: JSON.stringify({id: id}),
 	    dataType: 'text',
 	    success: function(result) {
-		window.location = JSON.parse(result).url
+		result = JSON.parse(result)
+		if (result.status == 1)
+		    window.location = JSON.parse(result).url
+		else
+		    console.log('bad result from backend')
 	    }
 });
     })
