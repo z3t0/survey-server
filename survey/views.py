@@ -8,7 +8,18 @@ from .models import Question, QuestionText, QuestionDropDown, Survey, SurveyResp
 
 
 @login_required
-def createSurvey(request):
+def createSurvey(request, survey_id=None):
+    context = {}
+
+    if survey_id != None:
+        # Edit survey
+        context['mode'] = 'edit'
+        context['id'] = survey_id
+
+    else:
+        # create survey
+        context['mode'] = 'create'
+
     if request.method == "POST":
         data = json.loads(request.body)
 
@@ -35,7 +46,7 @@ def createSurvey(request):
         response = {'status': 1, 'message': "Ok", 'url': reverse('survey:index')}
         return HttpResponse(json.dumps(response), content_type='application/json')
 
-    return render(request, 'survey/create_survey.html')
+    return render(request, 'survey/create_survey.html', context)
 
 @login_required
 def index(request):

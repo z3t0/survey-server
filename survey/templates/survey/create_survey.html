@@ -10,10 +10,23 @@ Create Survey Form
 {% block head %}
 {% render_bundle 'create_survey' %}
 <link rel="stylesheet" href="{% static 'survey/create_survey.css' %}" type="text/css" media="screen" />
+<script type="text/javascript">
+  // Gets variables from django templating
+  var mode = "{{mode}}"
+  if (mode === "edit"){
+  	var id = "{{id}}"
+  }
+</script>
 {% endblock %}
 
 {% block content %}
-  <h1 class="title">Create a new Survey</h1>
+  <h1 class="title">
+    {% if mode == "edit" %}
+      Edit your survey
+    {% elif mode == "create" %}
+      Create a new survey
+    {% endif %}
+  </h1>
   <div class="surveyBuilder container" >
 
       <div class="info" >

@@ -22,7 +22,7 @@ Survey
 	<p>{{ survey.name }}</p>
 
 	<div class="survey-buttons" >
-	    <a class="button" href="{% url 'survey:survey_edit' survey.id %}">Edit</a>
+	    <a class="button" href="{% url 'survey:survey_create' survey.id %}">Edit</a>
 	    <a class="button" href="{% url 'survey:survey_fill' survey.id %}">Fill</a>
 	    <a class="button" href="{% url 'survey:survey_results' survey.id %}">Results</a>
 	    {% if survey.author == user %}
