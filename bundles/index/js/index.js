@@ -45,7 +45,7 @@ $(document).ready(function () {
 	    success: function(result) {
 		result = JSON.parse(result)
 		if (result.status == 1)
-		    window.location = JSON.parse(result).url
+		    window.location = result.url
 		else
 		    console.log('bad result from backend')
 	    }

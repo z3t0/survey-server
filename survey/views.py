@@ -117,7 +117,8 @@ def deleteSurvey(request):
             survey = Survey.objects.get(pk=id)
 
             # Only the author can delete a survey, or a superuser
-            if (survey.author == request.user or survey.author.super_user):
+            if (survey.author == request.user or survey.autho.super_user):
+                survey.delete()
                 response = {'status': 1, 'message': "Ok", 'url': reverse('survey:index')}
                 return HttpResponse(json.dumps(response), content_type='application/json')
             else:
