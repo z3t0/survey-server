@@ -51,10 +51,17 @@ def editSurvey(request, survey_id):
 
     return render(request, 'survey/edit.html', context)
 
+@login_required
 def fillSurvey(request, survey_id):
     if request.method == "POST":
         data = json.loads(request.body)
+
         print(data)
+
+        import pdb
+        pdb.set_trace()
+
+        surveyResponse = surveyResponse(survey=survey_id)
 
         # Validate data
 
