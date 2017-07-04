@@ -76,6 +76,7 @@ class Survey {
 	    dataType: 'text',
 	    success: function(result) {
 		console.log('success')
+		window.location = JSON.parse(result).url
 	    }
 });
     }

@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 import json
 from .models import Question, QuestionText, QuestionDropDown, Survey, SurveyResponse, QuestionResponse, QuestionResponseText
 
@@ -9,7 +10,6 @@ from .models import Question, QuestionText, QuestionDropDown, Survey, SurveyResp
 def createSurvey(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        print(data)
 
         # Survey data
         survey = Survey(name= data["title"], description=data["description"])
@@ -30,7 +30,9 @@ def createSurvey(request):
                 print(question)
             else:
                 print("Unsupported Question type: " + question["type"])
-            
+
+        response = {'status': 1, 'message': "Ok", 'url': reverse('survey:index')}
+        return HttpResponse(json.dumps(response), content_type='application/json')
 
     return render(request, 'survey/create_survey.html')
 
@@ -40,7 +42,7 @@ def index(request):
     surveys = Survey.objects.all().order_by('-date')
     context = {'surveys': surveys}
 
-    print(surveys)
+    print('index')
 
     return render(request, 'survey/index.html', context)
 
