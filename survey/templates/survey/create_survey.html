@@ -13,29 +13,34 @@ Create Survey Form
 {% endblock %}
 
 {% block content %}
-  <div class="surveyBuilder" >
+  <h1 class="title">Create a new Survey</h1>
+  <div class="surveyBuilder container" >
 
       <div class="info" >
 	  <div>
-	      <input id="surveyTitle" type="text" placeholder="title" name="survey_title" >
+	      <input id="surveyTitle" class="row" type="text" placeholder="title" name="survey_title" >
 	  </div>
 	  <div>
-	      <input id="surveyDescription" type="text" placeholder="description" name="survey_title" >
+	      <input id="surveyDescription" class="row" type="text" placeholder="description" name="survey_title" >
 	  </div>
       </div>
 
+      <hr>
+      
       <div id ="questions"  class="questions">
       </div>
 
+      <hr>
       <div class="controls" >
 	  <div class="newQuestionDiv" >
-	      <div class="newQuestionOptions" >
-		  <button id="btnNewTextQuestion">New Text Question</a>
-		  <button id="btnNewMultipleChoiceQuestion">New Multiple Choice Question</a>
+	      <div class="newQuestionOptions row" >
+		  <button class="button button-outline column" id="btnNewTextQuestion">New Text Question</a>
+		  <button class="button button-outline column" id="btnNewMultipleChoiceQuestion">New Multiple Choice Question</a>
 	      </div>
 	  </div>
 	  <div>
-	      <button type="button" id="btnSubmit">Create Survey</button>
+	    <a class="button" id="btnSubmit">Create Survey</a>
+	      <!-- <button type="button" id="btnSubmit">Create Survey</button> -->
 	  </div>
       </div>
 
