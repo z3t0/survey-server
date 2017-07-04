@@ -98,6 +98,19 @@ def dataSurvey(request):
 
         return JsonResponse(data)
 
+def deleteSurvey(request):
+    if request.method == "POST":
+        id = json.loads(request.body)['id']
+
+        try:
+            Survey.objects.get(pk=id).delete()
+            response = {'status': 1, 'message': "Ok", 'url': reverse('survey:index')}
+            return HttpResponse(json.dumps(response), content_type='application/json')
+
+        except:
+            print("Failed to delete survey with id=" + id)
+
+
 def logout_view(request):
     logout(request)
 
