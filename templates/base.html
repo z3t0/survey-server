@@ -3,11 +3,21 @@
   <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    {% load static %}
     {%block head %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'survey/base.css' %}" type="text/css" media="screen" />
   </head>
   <body>
+    {% block navbar %}
+      <ul class="navbar">
+	<li><a class="active" href="{% url 'survey:index' %}">Home</a></li>
+	<li><a class="active" href="{% url 'survey:create_survey' %}">Create Survey</a></li>
+	<li><a class="active" href="">{{ user.get_username }}</a></li>
+      </ul>
+
+    {% endblock %}
     {% block content %}
-      {% endblock %}
+    {% endblock %}
   
   </body>
 </html>
