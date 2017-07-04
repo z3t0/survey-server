@@ -10,9 +10,9 @@
   <body>
     {% block navbar %}
       <ul class="navbar">
-	<li><a class="active" href="{% url 'survey:index' %}">Home</a></li>
-	<li><a class="active" href="{% url 'survey:create_survey' %}">Create Survey</a></li>
-	<li><a class="active" href="">{{ user.get_username }}</a></li>
+	<li><a href="{% url 'survey:index' %}">Home</a></li>
+	<li><a href="{% url 'survey:create_survey' %}">Create Survey</a></li>
+	<li style="float:right"><a>Hi, {{ user.first_name }}</a></li>
       </ul>
 
     {% endblock %}

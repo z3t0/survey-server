@@ -11,7 +11,7 @@
 }
 
 .navbar a {
-  display: block;
+    display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
@@ -20,4 +20,8 @@
 
 .navbar a:hover {
     background-color: #111;
+}
+
+.navbar-user {
+    float: right;
 }
