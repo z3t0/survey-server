@@ -19,10 +19,39 @@ $.ajaxSetup({
 
 class Survey {
 
-    constructor() {
+    constructor(id) {
 	this.questions = []
 	this.questionsElement = document.getElementById("questions")
 	this.questionNumber = 0
+
+	if (id) {
+	    this.id = id
+
+	    $.ajax({
+		url: 'http://localhost:8000/survey-data/',
+		type: 'GET',
+		contentType: 'application/json; charset=utf-8',
+		data: {id: id},
+		dataType: 'text',
+		success: (res) => {
+		    let data = JSON.parse(res)
+
+		    console.log(data)
+
+		    $("#surveyTitle").val(data.name)
+		    $("#surveyDescription").val(data.description)
+
+		    data.questions.forEach((question) => {
+			if (question.type == 'text') {
+			    let q = new QuestionText(this.questionsElement, question) 
+			    q.init()
+			}
+		    })
+		} 
+	    })
+
+	}
+
 
 	this.createElement()
 
@@ -56,11 +85,11 @@ class Survey {
 	data.questions = []
 	data.title = this.title()
 	data.description = this.description()
+	data.id = this.id
 	
 	this.questions.forEach((current, index, array) => {
 	    data.questions.push(current.data())
 	})
-
 
 	return data
     }
@@ -69,14 +98,22 @@ class Survey {
 	let data = this.data()
 	console.log(data)
 	$.ajax({
-	    url: 'http://localhost:8000/create-survey/',
+	    url: 'http://localhost:8000/survey-create/',
 	    type: 'POST',
 	    contentType: 'application/json; charset=utf-8',
 	    data: JSON.stringify(data),
 	    dataType: 'text',
 	    success: function(result) {
 		console.log('success')
-		window.location = JSON.parse(result).url
+		try {
+		    results = JSON.parse(result).url
+		    window.location = result.url
+		}
+
+		catch (e) {
+		    console.error('failed to submit survey data')
+		    console.error(e)
+		}
 	    }
 });
     }

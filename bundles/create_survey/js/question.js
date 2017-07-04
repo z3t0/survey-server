@@ -1,15 +1,22 @@
 class Question {
 
-    constructor(parent, attributes) {
+    constructor(parent, data) {
 	this.parent = parent
 
 	this.attributes = {}
 	this.attributes['main'] = {}
 
+	if (data) {
+	    this.attributes['main']['questionText'] = data.name
+	    this.order = data.index
+	}
+
     }
 
     init(order) {
-	this.order = order
+	if (order && !this.order) 
+	    this.order = order
+
 	this.element = document.createElement('div')
 
 	this.createElement()
@@ -25,6 +32,10 @@ class Question {
 	let questionText = document.createElement('input')
 	questionText.type = 'text'
 	questionText.placeholder = help
+
+	if (this.attributes['main']['questionText'])
+	    questionText.value = this.attributes['main']['questionText']
+
 	div2.appendChild(questionText)
 
 	this.attributes['main']['questionText'] = () => {

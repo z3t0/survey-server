@@ -5,10 +5,9 @@ $(document).ready(function() {
     //  Get Questions div
     let questions = $("#questions")
 
-    // Set up ine memory model
-    // TODO load from django for editing and errors
+    // Set up in-memory model
     // TOOD errors
-    let survey = new Survey()
+    let survey = new Survey(id)
 
     // Create question on buttons
     $("#btnNewTextQuestion").click(() => {

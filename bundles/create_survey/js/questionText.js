@@ -2,8 +2,8 @@ import {Question} from './question.js'
 
 class QuestionText extends Question {
 
-    constructor(parent) {
-	super(parent)
+    constructor(parent, data) {
+	super(parent, data)
     }
 
     createElement() {
