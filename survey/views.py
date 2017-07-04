@@ -51,8 +51,15 @@ def editSurvey(request, survey_id):
 
     return render(request, 'survey/edit.html', context)
 
-@login_required
 def fillSurvey(request, survey_id):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        print(data)
+
+        # Validate data
+
+        # Save data using user
+
     survey = Survey.objects.get(pk=survey_id)
     context = {'survey' : survey}
 
@@ -71,4 +78,3 @@ def dataSurvey(request):
         data = Survey.objects.get(pk=id).get_info()
 
         return JsonResponse(data)
-    

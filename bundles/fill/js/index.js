@@ -26,7 +26,6 @@ function gotSurveyData(data) {
     surveyResponse.init()
 
     $("#btnSubmit").on('click', () => {
-	let data = surveyResponse.get_data()
-	console.log(data)
+	surveyResponse.submit()
     })
 }
