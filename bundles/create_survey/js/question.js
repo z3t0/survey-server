@@ -27,8 +27,20 @@ class Question {
     createElement(help) {
 	let div = this.element
 
+	let divName = document.createElement('div')
+	divName.className = "row"
+
+	// Question Numbers
+	let divNumber = document.createElement('div')
+	divNumber.className = 'column-2'
+	let number = document.createElement('p')
+	number.textContent = this.order
+
+	divNumber.appendChild(number)
+	
 	// Question Text
-	let div2 = document.createElement('div')
+	let divText = document.createElement('div')
+	divText.className = 'column'
 	let questionText = document.createElement('input')
 	questionText.type = 'text'
 	questionText.placeholder = help
@@ -36,13 +48,16 @@ class Question {
 	if (this.attributes['main']['questionText'])
 	    questionText.value = this.attributes['main']['questionText']
 
-	div2.appendChild(questionText)
+	divText.appendChild(questionText)
 
 	this.attributes['main']['questionText'] = () => {
 	    return questionText.value
 	}
 
-	div.appendChild(div2)
+	divName.appendChild(divNumber)
+	divName.appendChild(divText)
+
+	div.appendChild(divName)
 
 	return div
     }
