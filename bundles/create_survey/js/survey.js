@@ -47,6 +47,7 @@ class Survey {
 			if (question.type == 'text') {
 			    let q = new QuestionText(this.questionsElement, question) 
 			    q.init()
+			    this.questionNumber++
 			}
 		    })
 		} 
@@ -108,7 +109,7 @@ class Survey {
 	    success: function(result) {
 		console.log('success')
 		try {
-		    results = JSON.parse(result).url
+		    result = JSON.parse(result)
 		    window.location = result.url
 		}
 
