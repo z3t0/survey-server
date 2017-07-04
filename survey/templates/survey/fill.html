@@ -4,40 +4,21 @@
 {% load render_bundle from webpack_loader %}
 
 {% block title %}
-Fill
+{{survey.name}}
 {% endblock %}
 
 {% block head %}
 {% render_bundle 'fill' %}
 <link rel="stylesheet" href="{% static 'survey/fill.css' %}" type="text/css" media="screen" />
+<script type="text/javascript">
+var id = {{survey.id}}
+</script>
 {% endblock %}
+
 
 {% block content %}
 
   <div class="survey-fill-in-form">
-
-      <p class="survey-title" >{{survey.name}}</p>
-      <p class="survey-description" >{{survey.description}}</p>
-
-
-      <div class="survey-fill-questions" >
-      {% for question in survey.question_set.all %}
-
-	  <div class="survey-question-{{question.type}}">
-	      <p class="question_name" >{{question.name}}</p>
-
-	      {% if question.type == "text" %}
-	      <input class="survey-fill-question-text-answer">
-	      {% endif %}
-
-	  </div>
-
-      {% endfor %}
-
-      </div>
-
-      <button type="button" id="btnSubmitAnswers" class="btnSubmit" >Submit Answers</button>
-      
   </div>
 
 {% endblock %}
