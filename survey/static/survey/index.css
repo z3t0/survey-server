@@ -1,9 +1,21 @@
+h4 {
+    color: black;
+}
+
+.survey-list {
+    margin-top: 1%;
+}
+
 .survey-list-item {
     background-color: #42f46b;
-    padding: 10px;
+    padding: 20px;
     margin: 2px;
 }
 
 .survey-list-item p {
     color: black;
+}
+
+.button {
+    margin: 5px;
 }

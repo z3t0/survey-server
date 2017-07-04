@@ -27,3 +27,8 @@ body {
 #btnSubmit {
     max-width: 300px;
 }
+
+.errors {
+    color: red;
+    margin-bottom: 2px;
+}

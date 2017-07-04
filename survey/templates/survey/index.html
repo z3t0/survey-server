@@ -14,19 +14,24 @@ Survey
 
 {% block content %}
 
-<div class="survey_list">
+<div class="survey-list">
     {% for survey in surveys %}
 
     <div class="survey-list-item" >
 
-	<p>{{ survey.name }}</p>
+	<h4>{{ survey.name }}</h4>
+	{% if survey.description != "" %}
+	<p>{{ survey.description}}</p>
+	{% endif %}
+	<p>{{ survey.date }}</p>
+	<p>Created by {{ survey.author.first_name }}</p>
 
-	<div class="survey-buttons" >
-	    <a class="button" href="{% url 'survey:survey_fill' survey.id %}">Fill</a>
-	    <a class="button" href="{% url 'survey:survey_results' survey.id %}">Results</a>
+	<div class="survey-buttons row" >
+	    <a class="button column" href="{% url 'survey:survey_fill' survey.id %}">Fill</a>
+	    <a class="button column" href="{% url 'survey:survey_results' survey.id %}">Results</a>
 	    {% if survey.author == user %}
-	    <a class="button" href="{% url 'survey:survey_create' survey.id %}">Duplicate</a>
-	    <a class="button btnDeleteSurvey" data-survey-id="{{ survey.id}}">Delete</a>
+	    <a class="button column" href="{% url 'survey:survey_create' survey.id %}">Duplicate</a>
+	    <a class="button btnDeleteSurvey column" data-survey-id="{{ survey.id}}">Delete</a>
 	    {% endif %}
 	</div>
     </div>
