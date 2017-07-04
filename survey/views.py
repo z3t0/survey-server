@@ -1,6 +1,7 @@
 from django.shortcuts import render
-import json
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+import json
 from .models import Question, QuestionText, QuestionDropDown, Survey
 
 
@@ -57,9 +58,17 @@ def fillSurvey(request, survey_id):
 
     return render(request, 'survey/fill.html', context)
 
-@login_required
+
 def resultsSurvey(request, survey_id):
     survey = Survey.objects.get(pk=survey_id)
     context = {'survey' : survey}
 
     return render(request, 'survey/results.html', context)
+
+def dataSurvey(request):
+    if request.method == "GET":
+        id = request.GET.get('id', None)
+        data = Survey.objects.get(pk=id).get_info()
+
+        return JsonResponse(data)
+    
