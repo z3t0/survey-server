@@ -45,9 +45,8 @@ class Survey {
 
 		    data.questions.forEach((question) => {
 			if (question.type == 'text') {
-			    let q = new QuestionText(this.questionsElement, question) 
-			    q.init()
-			    this.questionNumber++
+			    let opts = {data: question}
+			    this.createQuestionText(opts)
 			}
 		    })
 		} 
@@ -76,8 +75,10 @@ class Survey {
 	this.questions.push(question)
     }
 
-    createQuestionText() {
-	let question = new QuestionText(this.questionsElement)
+    createQuestionText(opts) {
+
+	let question = new QuestionText(this.questionsElement, opts)
+
 	question.init(++this.questionNumber)
 	this.questions.push(question)
     }
@@ -89,17 +90,61 @@ class Survey {
 	data.title = this.title()
 	data.description = this.description()
 	data.id = this.id
-	
+	data.errors = []
+
 	this.questions.forEach((current, index, array) => {
-	    data.questions.push(current.data())
+	    let info = current.data()
+
+	    if (info.error)
+		data.errors.push({question: current, error: info.error})
+
+	    data.questions.push(info.data)
 	})
 
 	return data
     }
 
+    validate(data) {
+	let errors = []
+	
+	// Validate
+	if (data.title == "") {
+	    errors.push("Please enter a title")
+	}
+
+	if (data.questions.length == 0) {
+	    // no questions
+	    errors.push("Please create some questions")
+	}
+
+	let questionError = false
+	data.errors.forEach((info) => {
+	    let err = info.error
+	    let question = info.question
+
+	    if (err) {
+		question.errorText(err)
+
+		if (!questionError) {
+		    errors.push("Please check your questions")
+		}
+		questionError = true
+	    }
+	})
+
+	return errors
+    }
+
     submit() {
 	let data = this.data()
+
+	let err = this.validate(data)
+
+	if (err.length != 0)
+	    return err
+
 	console.log(data)
+
 	$.ajax({
 	    url: 'http://localhost:8000/survey-create/',
 	    type: 'POST',

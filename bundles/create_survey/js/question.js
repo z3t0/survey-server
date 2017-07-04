@@ -1,18 +1,20 @@
 class Question {
 
-    constructor(parent, data) {
+    constructor(parent, opts) {
 	this.parent = parent
 
 	this.attributes = {}
 	this.attributes['main'] = {}
 
-	if (data) {
-	    this.attributes['main']['questionText'] = data.name
-	    this.order = data.index
+	if (opts) {
+	    if (opts.data) {
+		this.attributes['main']['questionText'] = opts.data.name
+		this.order = opts.data.index
+	    }
 	}
 
-    }
 
+    } 
     init(order) {
 	if (order && !this.order) 
 	    this.order = order
@@ -54,9 +56,31 @@ class Question {
 	    return questionText.value
 	}
 
+	// Error Text
+	let divError = document.createElement('div')
+	divError.hidden = true
+	let errorText = document.createElement('p')
+	errorText.className = "errors"
+
+	this.errorText = (err) => {
+	    if (err) {
+		errorText.textContent = err
+		divError.hidden = false
+	    }
+
+	    else {
+		divError.hidden = true
+		errorText.textContent = ""
+	    }
+	}
+
+	divError.appendChild(errorText)
+	
+
 	divName.appendChild(divNumber)
 	divName.appendChild(divText)
 
+	div.append(divError)
 	div.appendChild(divName)
 
 	return div
@@ -74,7 +98,15 @@ class Question {
 	    data[attr] = val
 	}
 
-	return data
+	let validate = this.validate()
+
+	return {data: data, error: validate}
+    }
+
+    validate() {
+	if (this.attributes['main']['questionText']() == "") {
+	    return "Missing name"
+	}
     }
 }
 
