@@ -22,9 +22,9 @@ Survey
 	<p>{{ survey.name }}</p>
 
 	<div class="survey-buttons" >
-	    <a href="{% url 'survey:survey_edit' survey.id %}">Edit</a>
-	    <a href="{% url 'survey:survey_fill' survey.id %}">Fill</a>
-	    <a href="{% url 'survey:survey_results' survey.id %}">Results</a>
+	    <a class="button" href="{% url 'survey:survey_edit' survey.id %}">Edit</a>
+	    <a class="button" href="{% url 'survey:survey_fill' survey.id %}">Fill</a>
+	    <a class="button" href="{% url 'survey:survey_results' survey.id %}">Results</a>
 	</div>
     </div>
 

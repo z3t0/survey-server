@@ -5,6 +5,14 @@
     <title>{% block title %}{% endblock %}</title>
     {% load static %}
     {%block head %}{% endblock %}
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}" type="text/css" media="screen" />
+
+
+    <!-- Milligram CSS Framework -->
+    <link rel="stylesheet" href="{% static 'css/milligram.min.css' %}" type="text/css" media="screen" />
+
+    <!-- My own css -->
     <link rel="stylesheet" href="{% static 'survey/base.css' %}" type="text/css" media="screen" />
   </head>
   <body>

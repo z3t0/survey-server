@@ -1,6 +1,9 @@
 .survey-list-item {
-    background-color: green;
-    color: white;
+    background-color: #42f46b;
     padding: 10px;
     margin: 2px;
+}
+
+.survey-list-item p {
+    color: black;
 }
