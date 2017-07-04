@@ -13,7 +13,7 @@ def createSurvey(request):
         data = json.loads(request.body)
 
         # Survey data
-        survey = Survey(name= data["title"], description=data["description"])
+        survey = Survey(name= data["title"], description=data["description"], author=request.user)
         survey.save()
 
         # Question data
@@ -97,6 +97,25 @@ def dataSurvey(request):
         data = Survey.objects.get(pk=id).get_info()
 
         return JsonResponse(data)
+
+def deleteSurvey(request):
+    if request.method == "POST":
+        id = json.loads(request.body)['id']
+
+        try:
+            survey = Survey.objects.get(pk=id)
+
+            # Only the author can delete a survey, or a superuser
+            if (survey.author == request.user or survey.author.super_user):
+                response = {'status': 1, 'message': "Ok", 'url': reverse('survey:index')}
+                return HttpResponse(json.dumps(response), content_type='application/json')
+            else:
+                response = {'status': 0, 'message': "Ok"}
+                return HttpResponse(json.dumps(response), content_type='application/json')
+
+        except:
+            print("Failed to delete survey with id=" + id)
+
 
 def logout_view(request):
     logout(request)
