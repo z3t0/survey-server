@@ -22,6 +22,6 @@ $(document).ready(function() {
 })
 
 function gotSurveyData(data) {
-    console.log(data)
-
+    let surveyResponse = new SurveyResponse(data, $('#survey-fill-in-form'))
+    surveyResponse.init()
 }
