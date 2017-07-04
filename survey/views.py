@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
-from .models import Question, QuestionText, QuestionDropDown, Survey
+from .models import Question, QuestionText, QuestionDropDown, Survey, SurveyResponse, QuestionResponse, QuestionResponseText
 
 
 @login_required
@@ -58,12 +58,21 @@ def fillSurvey(request, survey_id):
 
         print(data)
 
-        import pdb
-        pdb.set_trace()
 
-        surveyResponse = surveyResponse(survey=survey_id)
+        survey = Survey.objects.get(pk=survey_id)
+        surveyResponse = SurveyResponse(survey=survey, author=request.user)
+        surveyResponse.save()
 
         # Validate data
+        for response in data['questions']:
+            if response['type'] == 'text':
+                q = Question.objects.get(pk = response['id'])
+                res = QuestionResponseText(question = q, response = response['response'], parent = surveyResponse) 
+                res.save()
+
+                print(response)
+            else:
+                print("Unsupported question type" + response["type"])
 
         # Save data using user
 

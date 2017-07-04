@@ -92,6 +92,7 @@ class SurveyResponse(models.Model):
     date = models.DateField(default=timezone.now)
 
 class QuestionResponse(PolymorphicModel):
+    parent = models.ForeignKey(SurveyResponse, null = False)
     question = models.ForeignKey(Question)
 
 class QuestionResponseText(QuestionResponse):
