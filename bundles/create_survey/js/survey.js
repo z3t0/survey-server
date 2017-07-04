@@ -39,7 +39,9 @@ class Survey {
 		    console.log(data)
 
 		    $("#surveyTitle").val(data.name)
+		    $("#surveyTitle").focus()
 		    $("#surveyDescription").val(data.description)
+		    $("#surveyDescription").focus()
 
 		    data.questions.forEach((question) => {
 			if (question.type == 'text') {
