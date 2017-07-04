@@ -61,6 +61,7 @@ class Question (PolymorphicModel):
         data['description'] = self.description
         data['index'] = self.index
         data['required'] = self.required
+        data['id'] = self.id
 
         return data
         
