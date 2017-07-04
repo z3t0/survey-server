@@ -13,7 +13,7 @@ def createSurvey(request):
         data = json.loads(request.body)
 
         # Survey data
-        survey = Survey(name= data["title"], description=data["description"])
+        survey = Survey(name= data["title"], description=data["description"], author=request.user)
         survey.save()
 
         # Question data
