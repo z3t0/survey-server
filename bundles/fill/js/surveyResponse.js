@@ -51,7 +51,7 @@ class SurveyResponse {
 
 	// Survey Title
 	let divTitle = document.createElement('div')
-	let surveyTitle = document.createElement('p')
+	let surveyTitle = document.createElement('h2')
 	surveyTitle.textContent = this.data.name
 	surveyTitle.id = "survey-title"
 
@@ -63,7 +63,7 @@ class SurveyResponse {
 
 	// Survey description
 	let divDescription = document.createElement('div')
-	let surveyDescription = document.createElement('p')
+	let surveyDescription = document.createElement('h3')
 	surveyDescription.textContent = this.data.description
 	surveyDescription.id = 'survey-description'
 
