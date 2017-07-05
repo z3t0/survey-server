@@ -2,7 +2,8 @@ import $ from 'jquery'
 
 class Question {
 
-    constructor(parent, opts) {
+    constructor(survey, parent, opts) {
+	this.survey = survey
 	this.parent = parent
 
 	this.attributes = {}
@@ -40,6 +41,10 @@ class Question {
 	divNumber.className = 'column-2'
 	let number = document.createElement('p')
 	number.textContent = this.order
+	this.setOrder = (order) => {
+	    this.order = order
+	    number.textContent = order
+	}
 
 	divNumber.appendChild(number)
 	
@@ -121,12 +126,11 @@ class Question {
 
     moveUp() {
 	// Move the element up one question 
-
-	// Set order of question and change the text
+	let order = this.survey.moveUp(this)
     }
 
     moveDown() {
-
+	let order = this.survey.moveDown(this)
     }
 
     data() {
