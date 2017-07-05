@@ -121,7 +121,9 @@ class SurveyResponse {
 	    data: JSON.stringify(data),
 	    dataType: 'text',
 	    success: function(result) {
-		console.log('success')
+		result = JSON.parse(result)
+		if (result.status == 1)
+		    window.location = result.url
 	    }
 	})
     }
