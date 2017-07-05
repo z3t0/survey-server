@@ -1,3 +1,5 @@
+import $ from 'jquery'
+
 class Question {
 
     constructor(parent, opts) {
@@ -27,6 +29,7 @@ class Question {
     }
 
     createElement(help) {
+	let self = this
 	let div = this.element
 
 	let divName = document.createElement('div')
@@ -73,17 +76,57 @@ class Question {
 		errorText.textContent = ""
 	    }
 	}
-
 	divError.appendChild(errorText)
-	
+
+	// Question Controls
+	let divControls = document.createElement('div')
+	divControls.className = "row question-controls"
+
+	// Up Button
+	let divButtonUp = document.createElement('div')
+	divButtonUp.className = "column control-down"
+	let buttonUp = document.createElement('a')
+	buttonUp.className = 'button button-outline'
+	buttonUp.textContent = 'Up'
+	$(buttonUp).click(() => {
+	    this.moveUp()
+	})
+
+	divButtonUp.appendChild(buttonUp)
+	divControls.appendChild(divButtonUp)
+
+	// Down Button
+	let divButtonDown = document.createElement('div')
+	divButtonDown.className = "column control-down"
+	let buttonDown = document.createElement('a')
+	buttonDown.className = 'button button-outline'
+	buttonDown.textContent = 'Down'
+	$(buttonDown).click(() => {
+	    this.moveDown()
+	})
+
+	divButtonDown.appendChild(buttonDown)
+	divControls.appendChild(divButtonDown)
+
 
 	divName.appendChild(divNumber)
 	divName.appendChild(divText)
 
-	div.append(divError)
+	div.appendChild(divError)
 	div.appendChild(divName)
+	div.appendChild(divControls)
 
 	return div
+    }
+
+    moveUp() {
+	// Move the element up one question 
+
+	// Set order of question and change the text
+    }
+
+    moveDown() {
+
     }
 
     data() {
