@@ -120,6 +120,11 @@ def fillSurvey(request, survey_id):
             else:
                 print("Unsupported question type" + response["type"])
 
+        response = {'status': 1, 'message': "Ok", 'url': reverse('survey:survey_results', kwargs={'survey_id': survey_id})}
+        print(response['url'])
+        return HttpResponse(json.dumps(response), content_type='application/json')
+        
+
         # Save data using user
 
     survey = Survey.objects.get(pk=survey_id)
