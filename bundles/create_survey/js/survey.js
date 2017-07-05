@@ -1,6 +1,5 @@
 import {QuestionText} from './questionText.js'
 import {QuestionDropDown} from './questionDropDown.js'
-import $ from 'jquery'
 
 let csrftoken = getCookie('csrftoken')
 
@@ -24,6 +23,8 @@ class Survey {
 	this.questionsElement = document.getElementById("questions")
 	this.questionNumber = 0
 
+	$("#surveyDate").datepicker().datepicker('setDate', new Date())
+
 	if (id) {
 	    this.id = id
 
@@ -42,6 +43,8 @@ class Survey {
 		    $("#surveyTitle").focus()
 		    $("#surveyDescription").val(data.description)
 		    $("#surveyDescription").focus()
+		    $("surveyDate").val("H")
+		    $("surveyDate").focus()
 
 		    data.questions.forEach((question) => {
 			if (question.type == 'text') {
@@ -49,6 +52,13 @@ class Survey {
 			    this.createQuestionText(opts)
 			}
 		    })
+
+		    if (data.date) {
+			debugger
+			let date = new Date(data.date * 1000); 
+			date = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),  date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+			$("#surveyDate").datepicker('setDate', date)
+		    }
 		} 
 	    })
 
@@ -66,6 +76,10 @@ class Survey {
 
 	this.description = () => {
 	    return $("#surveyDescription").val()
+	}
+
+	this.date = () => {
+	    return $("#surveyDate").datepicker().datepicker('getDate')
 	}
     }
 
@@ -124,6 +138,8 @@ class Survey {
 	data.title = this.title()
 	data.description = this.description()
 	data.id = this.id
+	data.date = this.date().getTime()
+	debugger
 	data.errors = []
 
 	this.questions.forEach((current, index, array) => {
