@@ -1,4 +1,3 @@
-import $ from "jquery";
 import {Survey} from './survey.js'
 
 $(document).ready(function() {

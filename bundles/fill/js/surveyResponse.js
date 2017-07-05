@@ -1,5 +1,4 @@
 import {QuestionTextResponse} from './questionTextResponse.js'
-import $ from 'jquery'
 
 let csrftoken = getCookie('csrftoken')
 

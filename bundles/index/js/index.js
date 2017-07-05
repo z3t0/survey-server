@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 let csrftoken = getCookie('csrftoken')
 
 function csrfSafeMethod(method) {
