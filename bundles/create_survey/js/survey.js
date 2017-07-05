@@ -24,8 +24,6 @@ class Survey {
 	this.questionsElement = document.getElementById("questions")
 	this.questionNumber = 0
 
-	let self = this
-
 	if (id) {
 	    this.id = id
 
@@ -48,7 +46,7 @@ class Survey {
 		    data.questions.forEach((question) => {
 			if (question.type == 'text') {
 			    let opts = {data: question}
-			    this.createQuestionText(self, opts)
+			    this.createQuestionText(opts)
 			}
 		    })
 		} 
