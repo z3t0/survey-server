@@ -24,6 +24,8 @@ class Survey {
 	this.questionsElement = document.getElementById("questions")
 	this.questionNumber = 0
 
+	let self = this
+
 	if (id) {
 	    this.id = id
 
@@ -46,7 +48,7 @@ class Survey {
 		    data.questions.forEach((question) => {
 			if (question.type == 'text') {
 			    let opts = {data: question}
-			    this.createQuestionText(opts)
+			    this.createQuestionText(self, opts)
 			}
 		    })
 		} 
@@ -70,17 +72,51 @@ class Survey {
     }
 
     createQuestionDropDown() {
-	let question = new QuestionDropDown(this.questionsElement)
+	let question = new QuestionDropDown(this, this.questionsElement)
 	question.init(++this.questionNumber)
 	this.questions.push(question)
     }
 
     createQuestionText(opts) {
 
-	let question = new QuestionText(this.questionsElement, opts)
+	let question = new QuestionText(this, this.questionsElement, opts)
 
 	question.init(++this.questionNumber)
 	this.questions.push(question)
+    }
+
+    moveUp(question) {
+	// TOOD: bounds check
+	
+	let above = this.getQuestionByIndex(question.order - 1)
+
+	if (above) {
+	    let order = above.order
+	    above.setOrder(question.order)
+	    question.setOrder(order)
+	    $(question.element).insertBefore($(above.element))
+	}
+
+	else {
+	    console.error("faield to reorder question")
+	}
+    }
+
+    moveDown(question) {
+	let below = this.getQuestionByIndex(question.order + 1)
+	console.log(question.order)
+
+
+	if (below) {
+	    let order = below.order
+	    below.setOrder(question.order)
+	    question.setOrder(order)
+	    $(question.element).insertAfter($(below.element))
+	}
+
+	else {
+	    console.error("faield to reorder question")
+	}
     }
 
     data() {
