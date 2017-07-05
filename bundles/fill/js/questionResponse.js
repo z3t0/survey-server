@@ -15,10 +15,10 @@ class QuestionResponse {
     createElement(parent) {
 	let div = document.createElement('div')
 
-	let divName = document.createElement('name')
+	let divName = document.createElement('div')
 	divName.className = 'question-name'
 
-	let questionName = document.createElement('p')
+	let questionName = document.createElement('h4')
 	questionName.textContent = this.name
 
 	divName.appendChild(questionName)
