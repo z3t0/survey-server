@@ -71,6 +71,7 @@ def createSurvey(request, survey_id=None):
 
         if len(errors['questions']) > 0 or len(errors['survey']) > 0:
             response = {'status': 0, 'errors': errors}
+            survey.delete()
             return HttpResponse(json.dumps(response), content_type='application/json')
             
         else:

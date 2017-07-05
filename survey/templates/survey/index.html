@@ -15,6 +15,9 @@ Survey
 {% block content %}
 
 <div class="survey-list">
+    {% if surveys|length < 1 %}
+    <h3 class="center">There are no surveys at the moment, please check back later</h3>
+    {% else %}
     {% for survey in surveys %}
 
     <div class="survey-list-item" >
@@ -35,8 +38,8 @@ Survey
 	    {% endif %}
 	</div>
     </div>
-
     {% endfor %}
+    {% endif %}
 </div>
 
 {% endblock %}
