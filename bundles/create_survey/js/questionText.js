@@ -11,10 +11,10 @@ class QuestionText extends Question {
     }
 
     data() {
-	let info = super.data()
-	info.data['type'] = 'text'
+	let data= super.data()
+	data['type'] = 'text'
 
-	return info
+	return data
     }
 
 }

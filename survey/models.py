@@ -33,6 +33,14 @@ class Survey (models.Model):
     def __str__(self):
         return self.name
 
+    def validate(self):
+        errors = []
+
+        if self.name == "":
+            errors.append("Please enter a title")
+
+        return errors
+
     def get_info(self):
         if self.pk:
             data = {}
@@ -64,7 +72,13 @@ class Question (PolymorphicModel):
         data['id'] = self.id
 
         return data
-        
+
+    def validate(self):
+        errors = []
+        if self.name == "":
+            errors.append('Please enter a question')
+
+        return errors
 
     def __str__(self):
         return self.name

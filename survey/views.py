@@ -22,10 +22,24 @@ def createSurvey(request, survey_id=None):
 
     if request.method == "POST":
         data = json.loads(request.body)
+        errors = {}
+        errors['questions'] = []
+        errors['survey'] = []
 
         # Create Survey
         survey = Survey(name= data["title"], description=data["description"], author=request.user)
-        survey.save()
+        surveyErrors = survey.validate()
+
+        if len(surveyErrors) > 0:
+            for error in surveyErrors:
+                errors['survey'].append(error)
+        else:
+            survey.save()
+
+        if len(data['questions']) == 0:
+            errors['survey'].append("Please create some questions")
+
+        questionError = False
 
         # Question data
         for question in data['questions']:
@@ -33,8 +47,20 @@ def createSurvey(request, survey_id=None):
             if question['type'] == 'text':
                 print(question)
                 try:
-                    q = QuestionText(name=question["questionText"], index=question["order"], survey=survey)
-                    q.save()
+                    q = QuestionText(name=question["questionText"], index=question["order"])
+                    question_errors = q.validate()
+
+                    if len(question_errors) > 0:
+                        for error in question_errors:
+                            errors['questions'].append({'error': error, 'order': question['order']})
+
+                        if not questionError:
+                            questionError = True
+                            errors['survey'].append('Please check your questions')
+                        
+                    else:
+                        q.survey = survey
+                        q.save()
                 except:
                     print("an error occured while creating a text question")
 
@@ -43,8 +69,13 @@ def createSurvey(request, survey_id=None):
             else:
                 print("Unsupported Question type: " + question["type"])
 
-        response = {'status': 1, 'message': "Ok", 'url': reverse('survey:index')}
-        return HttpResponse(json.dumps(response), content_type='application/json')
+        if len(errors['questions']) > 0 or len(errors['survey']) > 0:
+            response = {'status': 0, 'errors': errors}
+            return HttpResponse(json.dumps(response), content_type='application/json')
+            
+        else:
+            response = {'status': 1, 'url': reverse('survey:index')}
+            return HttpResponse(json.dumps(response), content_type='application/json')
 
     return render(request, 'survey/create_survey.html', context)
 

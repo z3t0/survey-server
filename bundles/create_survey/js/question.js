@@ -98,15 +98,7 @@ class Question {
 	    data[attr] = val
 	}
 
-	let validate = this.validate()
-
-	return {data: data, error: validate}
-    }
-
-    validate() {
-	if (this.attributes['main']['questionText']() == "") {
-	    return "Missing name"
-	}
+	return data
     }
 }
 

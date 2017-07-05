@@ -93,57 +93,55 @@ class Survey {
 	data.errors = []
 
 	this.questions.forEach((current, index, array) => {
-	    let info = current.data()
-
-	    if (info.error)
-		data.errors.push({question: current, error: info.error})
-
-	    data.questions.push(info.data)
+	    data.questions.push(current.data())
 	})
 
 	return data
     }
 
-    validate(data) {
-	let errors = []
-	
-	// Validate
-	if (data.title == "") {
-	    errors.push("Please enter a title")
-	}
+    error (err) {
+	let div = $("#error-main")
+	div.children().remove()
 
-	if (data.questions.length == 0) {
-	    // no questions
-	    errors.push("Please create some questions")
-	}
+	if (err) {
+	    if (err.questions) {
+		let questionError = false
 
-	let questionError = false
-	data.errors.forEach((info) => {
-	    let err = info.error
-	    let question = info.question
+		err.questions.forEach((error) => {
+		    let question = this.getQuestionByIndex(error.order)
+		    question.errorText(error.error)
+		})
 
-	    if (err) {
-		question.errorText(err)
-
-		if (!questionError) {
-		    errors.push("Please check your questions")
-		}
-		questionError = true
 	    }
-	})
 
-	return errors
+	    if (err.survey) {
+		err.survey.forEach((error) => {
+		    let msg = document.createElement('p')
+		    msg.textContent = error
+		    msg.className = 'errors'
+		    div.append(msg)
+		})
+	    }
+
+	    div.show()
+	}
+
+	else {
+	    div.hide() 
+	}
+    }
+
+    getQuestionByIndex(index) {
+	let question = this.questions.find((q) => {
+	    return q.order == index
+	})
+	
+	return question
     }
 
     submit() {
 	let data = this.data()
-
-	let err = this.validate(data)
-
-	if (err.length != 0)
-	    return err
-
-	console.log(data)
+	let cb = this.error.bind(this)
 
 	$.ajax({
 	    url: 'http://localhost:8000/survey-create/',
@@ -152,10 +150,18 @@ class Survey {
 	    data: JSON.stringify(data),
 	    dataType: 'text',
 	    success: function(result) {
-		console.log('success')
+		
 		try {
 		    result = JSON.parse(result)
-		    window.location = result.url
+		    if (result.errors) {
+			cb(result.errors)
+			return
+		    }
+
+		    else {
+			window.location = result.url
+		    }
+			
 		}
 
 		catch (e) {
@@ -163,7 +169,7 @@ class Survey {
 		    console.error(e)
 		}
 	    }
-});
+	});
     }
 }
 

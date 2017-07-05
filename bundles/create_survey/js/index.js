@@ -21,25 +21,7 @@ $(document).ready(function() {
     // Submit handler
     $("#btnSubmit").click(() => {
 	let err = survey.submit()
-	let div = $("#error-main")
-	div.children().remove()
-
-	if (err) {
-
-	    err.forEach((error) => {
-		let el = document.createElement('p')
-		el.className = "errors"
-		el.textContent = error
-
-		div.append(el)
-	    })
-
-	    div.show()
-	}
-
-	else {
-	    div.hide() 
-	}
     })
 
 })
+
