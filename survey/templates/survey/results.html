@@ -14,4 +14,26 @@ Results
 
 {% block content %}
 
+  <h2>{{survey.name}}</h2>
+
+  {% if responses|length > 0 %}
+  {% for response in responses %}
+
+    <h3 class="response-user">{{response.surveyResponse.author.first_name}}</h3>
+
+    {% for question in response.questionResponses %}
+
+      {% if question.type == "text" %}
+	<h4>{{question.question.name}}</h4>
+	<p>{{question.response}}</p>
+      {% else %}
+	<p>Unknown question type: "{{question.type}}"</p>
+      {% endif %}
+      
+    {% endfor %}
+  {% endfor %}
+  {% else %}
+    <h4>No responses yet</h4>
+  {% endif %}
+
 {% endblock %}

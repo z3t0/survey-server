@@ -130,7 +130,23 @@ def fillSurvey(request, survey_id):
 
 def resultsSurvey(request, survey_id):
     survey = Survey.objects.get(pk=survey_id)
-    context = {'survey' : survey}
+    surveyResponses = SurveyResponse.objects.filter(survey_id=survey_id)
+
+    responses = []
+    for response in surveyResponses:
+        res = {}
+        res['surveyResponse'] = response
+
+        questionResponses = QuestionResponse.objects.filter(parent_id=response)
+
+        res['questionResponses'] = []
+        for question in questionResponses:
+            res['questionResponses'].append(question)
+
+        responses.append(res)
+        
+
+    context = {'responses': responses, 'survey': survey}
 
     return render(request, 'survey/results.html', context)
 
