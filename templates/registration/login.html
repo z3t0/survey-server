@@ -1,8 +1,22 @@
 
-{% block title %}Login{% endblock %}
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+
+{% block title %}
+User Login
+{% endblock %}
+
+{% block head %}
+{% render_bundle 'login' %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
 
 {% block content %}
-  <h2>Login</h2>
+  <h2 class="title">Login</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
