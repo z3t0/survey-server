@@ -21,7 +21,7 @@ def createSurvey(request, survey_id=None):
         context['mode'] = 'create'
 
     if request.method == "POST":
-        data = json.loads(request.body)
+        data = json.loads(request.body.decode('utf-8'))
         errors = {}
         errors['questions'] = []
         errors['survey'] = []
@@ -113,7 +113,7 @@ def editSurvey(request, survey_id):
 @login_required
 def fillSurvey(request, survey_id):
     if request.method == "POST":
-        data = json.loads(request.body)
+        data = json.loads(request.body.decode('utf-8'))
 
         print(data)
 
@@ -177,7 +177,7 @@ def dataSurvey(request):
 
 def deleteSurvey(request):
     if request.method == "POST":
-        id = json.loads(request.body)['id']
+        id = json.loads(request.body.decode('utf-8'))['id']
 
         try:
             survey = Survey.objects.get(pk=id)
