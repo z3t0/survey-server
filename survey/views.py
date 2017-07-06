@@ -98,7 +98,7 @@ def createSurvey(request, survey_id=None):
 @login_required
 def index(request):
 
-    surveys = Survey.objects.all().order_by('-date')
+    surveys = Survey.objects.all().filter(date__lte=datetime.now()).order_by('-date')
     context = {'surveys': surveys}
 
     print('index')
