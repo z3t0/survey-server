@@ -101,8 +101,6 @@ def index(request):
     surveys = Survey.objects.all().filter(date__lte=datetime.now()).order_by('-date')
     context = {'surveys': surveys}
 
-    print('index')
-
     return render(request, 'survey/index.html', context)
 
 @login_required
@@ -147,7 +145,7 @@ def fillSurvey(request, survey_id):
 
     return render(request, 'survey/fill.html', context)
 
-
+@login_required
 def resultsSurvey(request, survey_id):
     survey = Survey.objects.get(pk=survey_id)
     surveyResponses = SurveyResponse.objects.filter(survey_id=survey_id)
@@ -201,3 +199,10 @@ def logout_view(request):
     logout(request)
 
     return HttpResponseRedirect(reverse('survey:index'))
+
+def mysurveys_view(request):
+    surveys = Survey.objects.all().filter(author_id=request.user).order_by('-date')
+    context = {'surveys': surveys}
+
+    return render(request, 'survey/index.html', context)
+    

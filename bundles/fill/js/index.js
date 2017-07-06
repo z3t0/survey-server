@@ -9,7 +9,7 @@ $(document).ready(function() {
     // Get survey data
     let data = {id: id}
     $.ajax({
-	url: 'http://localhost:8000/survey-data/',
+	url: base_url + '/survey-data/',
 	type: 'GET',
 	contentType: 'application/json; charset=utf-8',
 	data: data,

@@ -16,6 +16,11 @@
     <!-- jquery -->
     <script src="{% static 'external/jquery/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'external/jquery-ui/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript">
+      // Gets variables from django templating
+      var url_base = "http://{{ request.META.HTTP_HOST }}"
+    </script>
+
     {%block head %}{% endblock %}
   </head>
   <body>
@@ -23,8 +28,9 @@
       <ul class="navbar">
 	<li><a href="{% url 'survey:index' %}">Home</a></li>
 	<li><a href="{% url 'survey:survey_create' %}">Create Survey</a></li>
+	<li><a href="{% url 'survey:my_surveys' %}">My Surveys</a></li>
 	<li style="float:right"><a href="{% url 'survey:logout' %}">Logout</a></li>
-	<li style="float:right"><a>Hi, {{ user.first_name }}</a></li>
+	<li style="float:right"><a>Hi, {% if user.first_name %}{{ user.first_name }}{% else %}{{user.get_username}}{% endif %}</a></li>
       </ul>
 
     {% endblock %}

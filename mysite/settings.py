@@ -26,7 +26,7 @@ SECRET_KEY = 'dyp_35pbmsknbp4@55oi_^#9u!bok(zqi#56vh=f@p#!!jmu1i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.215', 'localhost']
+ALLOWED_HOSTS = ['192.168.0.215', 'localhost', '104.131.122.186']
 
 
 # Application definition
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webpack_loader',
-    'debug_toolbar'
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
