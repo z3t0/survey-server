@@ -147,7 +147,7 @@ def fillSurvey(request, survey_id):
 
     return render(request, 'survey/fill.html', context)
 
-
+@login_required
 def resultsSurvey(request, survey_id):
     survey = Survey.objects.get(pk=survey_id)
     surveyResponses = SurveyResponse.objects.filter(survey_id=survey_id)
