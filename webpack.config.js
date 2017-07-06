@@ -11,7 +11,7 @@ module.exports = {
         edit: './bundles/edit/js/index.js',
         fill: './bundles/fill/js/index.js',
         results: './bundles/results/js/index.js',
-	login: './bundles/login/js/index.js'
+        login: './bundles/login/js/index.js'
     },
     output: {
 	path: path.resolve('./static_src/bundles/'),

@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 
+from registration.backends.simple.views import RegistrationView
+from survey.forms import RegistrationFormWithName
 
 urlpatterns = [
     url(r'^', include('survey.urls')),
+    url(r'^register/$', RegistrationView.as_view(form_class = RegistrationFormWithName)),
     url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),
 ]

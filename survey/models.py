@@ -117,4 +117,3 @@ class QuestionResponse(PolymorphicModel):
 class QuestionResponseText(QuestionResponse):
     type = models.CharField(max_length=30, default="text")
     response = models.TextField()
-

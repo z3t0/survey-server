@@ -22,4 +22,9 @@ User Login
     {{ form.as_p }}
     <button type="submit">Login</button>
   </form>
+
+  <hr>
+
+  <h4>Don't have an account?</h4>
+  <a class="button" href="http://{{request.META.HTTP_HOST}}/register">Register</a>
 {% endblock %}
