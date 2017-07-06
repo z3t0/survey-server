@@ -29,7 +29,7 @@ class Survey {
 	    this.id = id
 
 	    $.ajax({
-		url: base_url + '/survey-data/',
+		url: url_base + '/survey-data/',
 		type: 'GET',
 		contentType: 'application/json; charset=utf-8',
 		data: {id: id},

@@ -28,6 +28,7 @@
       <ul class="navbar">
 	<li><a href="{% url 'survey:index' %}">Home</a></li>
 	<li><a href="{% url 'survey:survey_create' %}">Create Survey</a></li>
+	<li><a href="{% url 'survey:my_surveys' %}">My Surveys</a></li>
 	<li style="float:right"><a href="{% url 'survey:logout' %}">Logout</a></li>
 	<li style="float:right"><a>Hi, {% if user.first_name %}{{ user.first_name }}{% else %}{{user.get_username}}{% endif %}</a></li>
       </ul>

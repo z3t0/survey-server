@@ -114,7 +114,7 @@ class SurveyResponse {
 	let data = this.get_data()
 	console.log(data)
 	$.ajax({
-	    url: base_url + '/survey-fill/' + id,
+	    url: url_base + '/survey-fill/' + id,
 	    type: 'POST',
 	    contentType: 'application/json; charset=utf-8',
 	    data: JSON.stringify(data),

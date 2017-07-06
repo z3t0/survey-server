@@ -6,6 +6,7 @@ app_name = 'survey'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^logout/$', views.logout_view, name='logout'),
+    url(r'^my-surveys/$', views.mysurveys_view, name='my_surveys'),
     url(r'^survey-create/(?P<survey_id>[0-9]+)$', views.createSurvey, name='survey_create'),
     url(r'^survey-create/$', views.createSurvey, name='survey_create'),
     url(r'^survey-edit/(?P<survey_id>[0-9]+)$', views.editSurvey, name='survey_edit'),

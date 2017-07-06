@@ -35,7 +35,7 @@ $(document).ready(function () {
 
 	// Send delete POST
 	$.ajax({
-	    url: base_url + '/survey-delete/',
+	    url: url_base + '/survey-delete/',
 	    type: 'POST',
 	    contentType: 'application/json; charset=utf-8',
 	    data: JSON.stringify({id: id}),
