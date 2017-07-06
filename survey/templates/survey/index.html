@@ -27,7 +27,7 @@ Survey
 	<p>{{ survey.description}}</p>
 	{% endif %}
 	<p>{{ survey.date }}</p>
-	<p>Created by {{ survey.author.first_name }}</p>
+	<p>Created by {% if survey.author.first_name %}{{ survey.author.first_name }}{% else %}{{ survey.author.get_username}}{% endif %}</p>
 
 	<div class="survey-buttons row" >
 	    <a class="button column" href="{% url 'survey:survey_fill' survey.id %}">Fill</a>

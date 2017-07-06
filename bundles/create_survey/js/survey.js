@@ -29,7 +29,7 @@ class Survey {
 	    this.id = id
 
 	    $.ajax({
-		url: 'http://localhost:8000/survey-data/',
+		url: base_url + '/survey-data/',
 		type: 'GET',
 		contentType: 'application/json; charset=utf-8',
 		data: {id: id},
@@ -54,7 +54,6 @@ class Survey {
 		    })
 
 		    if (data.date) {
-			debugger
 			let date = new Date(data.date * 1000); 
 			date = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),  date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
 			$("#surveyDate").datepicker('setDate', date)
@@ -139,7 +138,6 @@ class Survey {
 	data.description = this.description()
 	data.id = this.id
 	data.date = this.date().getTime()
-	debugger
 	data.errors = []
 
 	this.questions.forEach((current, index, array) => {
@@ -194,7 +192,7 @@ class Survey {
 	let cb = this.error.bind(this)
 
 	$.ajax({
-	    url: 'http://localhost:8000/survey-create/',
+	    url: url_base + '/survey-create/',
 	    type: 'POST',
 	    contentType: 'application/json; charset=utf-8',
 	    data: JSON.stringify(data),

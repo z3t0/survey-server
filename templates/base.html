@@ -16,6 +16,11 @@
     <!-- jquery -->
     <script src="{% static 'external/jquery/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'external/jquery-ui/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript">
+      // Gets variables from django templating
+      var url_base = "http://{{ request.META.HTTP_HOST }}"
+    </script>
+
     {%block head %}{% endblock %}
   </head>
   <body>
