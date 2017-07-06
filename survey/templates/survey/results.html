@@ -17,20 +17,26 @@ Results
   <h2>{{survey.name}}</h2>
 
   {% if responses|length > 0 %}
+    <h4>Total responses: {{responses|length }}</h4>
   {% for response in responses %}
+    <div class="response">
 
-    <h3 class="response-user">{{response.surveyResponse.author.first_name}}</h3>
+    <h3 class="response-user">From: {{response.surveyResponse.author.first_name}}</h3>
 
     {% for question in response.questionResponses %}
 
       {% if question.type == "text" %}
-	<h4>{{question.question.name}}</h4>
-	<p>{{question.response}}</p>
+      <div class="row">
+	<h4 class="column-2">{{ question.question.index }}.</h4>
+	<h4 class="column">{{question.question.name}}</h4>
+      </div>
+	<p class="question-text-answer">{{question.response}}</p>
       {% else %}
 	<p>Unknown question type: "{{question.type}}"</p>
       {% endif %}
       
     {% endfor %}
+    </div>
   {% endfor %}
   {% else %}
     <h4>No responses yet</h4>

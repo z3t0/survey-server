@@ -1,0 +1,19 @@
+h2 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.response {
+    background-color: #9b4dca;
+    padding: 10px;
+    color: white;
+    margin: 10px;
+}
+
+.row {
+    margin: 5px;
+}
+
+.question-text-answer {
+    margin-left: 10%;
+}
