@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core import serializers
 
 from polymorphic.models import PolymorphicModel 
+from datetime import date, datetime
 
 
 class Category (models.Model):
@@ -48,10 +49,14 @@ class Survey (models.Model):
             data['description'] = self.description
             data['questions'] = []
 
+            # time stamp
+            date = datetime.timestamp(datetime.combine(self.date, datetime.min.time()))
+            
+            data['date'] = date
+
             for question in self.get_questions():
                 question_data = question.get_data()
                 data['questions'].append(question_data)
-
 
             return data
 

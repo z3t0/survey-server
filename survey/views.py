@@ -5,7 +5,7 @@ from django.urls import reverse
 import json
 from django.contrib.auth import logout
 from .models import Question, QuestionText, QuestionDropDown, Survey, SurveyResponse, QuestionResponse, QuestionResponseText
-
+from datetime import datetime
 
 @login_required
 def createSurvey(request, survey_id=None):
@@ -27,21 +27,21 @@ def createSurvey(request, survey_id=None):
         errors['survey'] = []
 
         # Create Survey
-        survey = Survey(name= data["title"], description=data["description"], author=request.user)
-        surveyErrors = survey.validate()
+        date = datetime.fromtimestamp(data['date'] / 1000.0)
+        print(date)
+        survey = Survey(name=data["title"], description=data["description"], author=request.user, date=date)
 
+        # Validate first
+        surveyErrors = survey.validate()
         if len(surveyErrors) > 0:
             for error in surveyErrors:
                 errors['survey'].append(error)
-        else:
-            survey.save()
 
         if len(data['questions']) == 0:
             errors['survey'].append("Please create some questions")
 
         questionError = False
-
-        # Question data
+        # Validate questions
         for question in data['questions']:
             """ Text Question """
             if question['type'] == 'text':
@@ -58,9 +58,6 @@ def createSurvey(request, survey_id=None):
                             questionError = True
                             errors['survey'].append('Please check your questions')
                         
-                    else:
-                        q.survey = survey
-                        q.save()
                 except:
                     print("an error occured while creating a text question")
 
@@ -70,11 +67,29 @@ def createSurvey(request, survey_id=None):
                 print("Unsupported Question type: " + question["type"])
 
         if len(errors['questions']) > 0 or len(errors['survey']) > 0:
+            # If there are errors, send them back
             response = {'status': 0, 'errors': errors}
-            survey.delete()
             return HttpResponse(json.dumps(response), content_type='application/json')
             
         else:
+            # Otherwise, save the data and redirect
+            survey.save()
+            # Save the data this time
+            for question in data['questions']:
+                """ Text Question """
+                if question['type'] == 'text':
+                    print(question)
+                    try:
+                        q = QuestionText(name=question["questionText"], index=question["order"], survey=survey)
+                        q.save()
+                    except:
+                        print("an error occured while creating a text question")
+
+                elif question['type'] == 'dropdown':
+                    print(question)
+                else:
+                    print("Unsupported Question type: " + question["type"])
+
             response = {'status': 1, 'url': reverse('survey:index')}
             return HttpResponse(json.dumps(response), content_type='application/json')
 
@@ -83,7 +98,7 @@ def createSurvey(request, survey_id=None):
 @login_required
 def index(request):
 
-    surveys = Survey.objects.all().order_by('-date')
+    surveys = Survey.objects.all().filter(date__lte=datetime.now()).order_by('-date')
     context = {'surveys': surveys}
 
     print('index')

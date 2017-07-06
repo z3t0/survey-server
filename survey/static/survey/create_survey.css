@@ -42,3 +42,29 @@ body {
     margin: auto;
     max-width: 400px;
 }
+
+.ui-datepicker {
+    background-color: #9B4DCA;
+    padding: 10px;
+    color: white;
+}
+
+.ui-datepicker-title {
+    margin-top: 5px;
+}
+
+span.ui-icon {
+    color: white;
+}
+
+a.ui-corner-all {
+    margin: 10px;
+    padding: 5px;
+    background-color: gray;
+}
+
+a.ui-state-default {
+    color: white;
+}
+
+#ui-datepicker-div {display: none;}
