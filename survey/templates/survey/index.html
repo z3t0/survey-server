@@ -16,7 +16,11 @@ Survey
 
 <div class="survey-list">
     {% if surveys|length < 1 %}
+    {% if mine %}
+    <h3 class="center">You have not created any surveys yet.</h3>
+    {% else %}
     <h3 class="center">There are no surveys at the moment, please check back later</h3>
+    {% endif %}
     {% else %}
     {% for survey in surveys %}
 

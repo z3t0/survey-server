@@ -99,7 +99,7 @@ def createSurvey(request, survey_id=None):
 def index(request):
 
     surveys = Survey.objects.all().filter(date__lte=datetime.now()).order_by('-date')
-    context = {'surveys': surveys}
+    context = {'surveys': surveys, 'mine': False}
 
     return render(request, 'survey/index.html', context)
 
@@ -202,7 +202,7 @@ def logout_view(request):
 
 def mysurveys_view(request):
     surveys = Survey.objects.all().filter(author_id=request.user).order_by('-date')
-    context = {'surveys': surveys}
+    context = {'surveys': surveys, 'mine': True}
 
     return render(request, 'survey/index.html', context)
     
